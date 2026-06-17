@@ -16,7 +16,7 @@ public class ClientRepositoryTest {
     @Test
     public void testCreationClient() {
 
-
+        // Arrange
         Adresse adresse1 = new Adresse("rue des mouettes", "Quimper", "29000");
         Adresse adresse2 = new Adresse("rue des chouettes", "Rennes", "35000");
 
