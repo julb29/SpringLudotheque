@@ -28,13 +28,13 @@ public class Client {
     @Column(unique=true)
     private String email;
 
-    /*
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name="client_id")
-    private List<Adresse> adresses= new ArrayList<Adresse>();
-    */
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    @JoinColumn(name="id_adresse") // Clé étrangère dans la table Client
+    private Adresse adresse;
+
 
     private String telephone;
+
 
     @Override
     public String toString() {
