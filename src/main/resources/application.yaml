@@ -1,3 +1,9 @@
 spring:
   application:
     name: SpringLudotheque
+
+  #Connection to DB
+  datasource:
+    url: jdbc:sqlserver://localhost;databasename=LUDO_BD;integratedSecurity=false;encrypt=false;trustServerCertificate=false
+    username: sa
+    password: Pa$$w0rd
