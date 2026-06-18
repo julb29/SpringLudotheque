@@ -24,11 +24,10 @@ public class GenreRepositoryTest {
         genreRepository.save(g2);
 
         // Assert
-        Genre genreBD = genreRepository.findById(g1.getId().get());
+        Genre genreBD = genreRepository.findById(g1.getId())
+                .orElseThrow(() -> new RuntimeException("Genre not found"));
         assertThat(genreBD).isNotNull();
-
-
-
+        assertThat(genreBD.getLibelle()).isEqualTo(g1.getLibelle());
 
     }
 }

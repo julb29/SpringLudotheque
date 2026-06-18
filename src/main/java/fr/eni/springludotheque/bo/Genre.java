@@ -1,9 +1,6 @@
 package fr.eni.springludotheque.bo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -16,9 +13,14 @@ import lombok.RequiredArgsConstructor;
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NonNull
     private String libelle;
+
+    public Genre(Integer id) {
+        this.id = id;
+    }
+
 }
