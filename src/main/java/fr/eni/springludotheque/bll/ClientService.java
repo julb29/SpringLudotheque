@@ -6,4 +6,5 @@ public interface ClientService {
 
     void creationClient(Client client);
 
+    void updateClient(Client client);
 }

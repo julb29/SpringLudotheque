@@ -28,7 +28,7 @@ public class Client {
     @Column(unique=true)
     private String email;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},orphanRemoval = true, fetch=FetchType.EAGER)
     @JoinColumn(name="id_adresse") // Clé étrangère dans la table Client
     private Adresse adresse;
 

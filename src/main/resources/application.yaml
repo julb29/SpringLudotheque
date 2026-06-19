@@ -4,9 +4,10 @@ spring:
 
   #Connection to DB
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databasename=LUDO_BD;integratedSecurity=false;encrypt=false;trustServerCertificate=false
-    username: sa
-    password: Pa$$w0rd
+    url: jdbc:sqlserver://localhost:1433;databaseName=LUDO_BD;integratedSecurity=false;encrypt=false;trustServerCertificate=false
+    username: LUDO_USER
+    password: LUDO_PWD
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   #Options to DB
   jpa:
@@ -14,5 +15,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
     hibernate:
       ddl-auto: create
