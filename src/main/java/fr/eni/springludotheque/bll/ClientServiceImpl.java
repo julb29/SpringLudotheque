@@ -22,6 +22,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void updateClient (Client client) {
+        if (clientRepository.findById(client.getId()).orElse(null) == null) {
+            throw new RuntimeException(client.getId() + " n'existe pas");
+        }
         clientRepository.save(client);
     }
 

@@ -3,6 +3,7 @@ package fr.eni.springludotheque.dal;
 import fr.eni.springludotheque.bll.ClientService;
 import fr.eni.springludotheque.bo.Adresse;
 import fr.eni.springludotheque.bo.Client;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,8 +73,6 @@ public class ClientRepositoryTest {
         assertThat(clientBD.getPrenom()).isEqualTo(c1.getPrenom());
         assertThat(clientBD.getAdresse()).isEqualTo(c1.getAdresse());
 
-
-
     }
 
     @Test
@@ -98,6 +97,22 @@ public class ClientRepositoryTest {
         assertThat(clientBD).isNotNull();
         assertThat(clientBD.getAdresse()).isEqualTo(c1.getAdresse());
     }
+
+    @Test
+    public void testModificationClientNegatif () {
+
+        // Arrange : Créa d'un client c1 avec son adresse aInitiale
+        Adresse a1 = new Adresse("rue des mouettes", "Quimper", "29000");
+        Client clientInexistant = new Client("DUPOND", "Pierre");
+        clientInexistant.setId(2000);
+        clientInexistant.setAdresse(a1);
+
+        // Act + Assert
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            clientService.updateClient(clientInexistant);
+        });
+    }
+
 
     @Test
     public void testFindByNomStartingWith() {

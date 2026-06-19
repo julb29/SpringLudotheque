@@ -12,7 +12,8 @@ public class JeuServiceImpl implements JeuService {
 
     @Autowired
     public JeuServiceImpl(JeuRepository jeuRepository) {
-        this.jeuRepository = jeuRepository;
+
+       this.jeuRepository = jeuRepository;
     }
 
     @Override
