@@ -4,7 +4,7 @@ import fr.eni.springludotheque.bo.Client;
 
 public interface ClientService {
 
-    void creationClient(Client client);
+    Client creationClient(Client client);
 
     void updateClient(Client client);
 }

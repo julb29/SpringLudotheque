@@ -18,6 +18,7 @@ public class JeuServiceimplTest {
     @Autowired
     private JeuRepository jeuRepository;
 
+
     @Test
     public void creationJeu() {
 
@@ -46,4 +47,18 @@ public class JeuServiceimplTest {
         Assertions.assertEquals(1, jeuBD.getGenres().get(0).getId()); // On vérifie que c'est bien l'ID 1
     }
 
+    /*@Test
+    public void editListeJeu() {
+
+        // Arrange
+        Jeu j1 = new Jeu(("ref","Tomb raider", 20d);
+
+
+
+
+    }
+        */
+
 }
+
+

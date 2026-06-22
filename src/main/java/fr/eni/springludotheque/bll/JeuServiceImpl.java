@@ -5,6 +5,8 @@ import fr.eni.springludotheque.dal.JeuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JeuServiceImpl implements JeuService {
 
@@ -12,12 +14,25 @@ public class JeuServiceImpl implements JeuService {
 
     @Autowired
     public JeuServiceImpl(JeuRepository jeuRepository) {
+
         this.jeuRepository = jeuRepository;
     }
 
     @Override
     public void creationJeu(Jeu jeu) {
+
         jeuRepository.save(jeu);
+    }
+
+    @Override
+    public void editListeJeu(Jeu jeu) {
+
+    }
+
+    @Override
+    public List<Jeu> rechercherParGenre(String libelle) {
+        // Remplace .findByGenresJeu(libelle) par le nouveau nom :
+        return jeuRepository.findByGenres_Libelle(libelle);
     }
 
 }
