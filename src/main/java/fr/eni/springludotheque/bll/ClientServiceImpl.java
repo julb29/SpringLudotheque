@@ -16,18 +16,26 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client creationClient (Client client) {
+    public Client creationClient(Client client) {
         clientRepository.save(client);
         return client;
     }
 
     @Override
-    public void updateClient (Client client) {
+    public void updateClient(Client client) {
         clientRepository.save(client);
-    }
-
 
     }
+
+    @Override
+    public void deleteClient(Integer id) {
+        clientRepository.deleteById(id);
+    }
+
+}
+
+
+
 
 
 
