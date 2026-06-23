@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/clients")
@@ -18,7 +22,18 @@ public class ClientRestController {
         this.clientService = clientService;
     }
 
-// POST
+    // GET
+    // Retourne la liste des clients et le statut http OK
+    @GetMapping
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Client> getAllClient() {
+        List<Client> clients = clientService.getAllClient();
+        return clients;
+    }
+
+
+
+    // POST
     @PostMapping
     public ResponseEntity<Client> creerClient(@RequestBody Client client) {
         if (client == null) {
@@ -29,6 +44,7 @@ public class ClientRestController {
                 .body(nouveauClient);
     }
 
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable Integer id) {
         try {
@@ -39,5 +55,16 @@ public class ClientRestController {
         }
     }
 
+    // PUT
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateClient(@PathVariable Integer id, @Valid @RequestBody Client client) {
+        try {
+            Client clientModifie = clientService.updateClient(id, client);
+            return ResponseEntity.ok(clientModifie); // Ici c'est un Client, c'est OK
+        } catch(ClientNotFoundException enf) {
+            // Ici c'est un String, et grâce au "?", Java l'accepte !
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enf.getMessage());
+        }
+    }
 
 }

@@ -9,5 +9,6 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
      List<Client> findByNomStartingWith(String nom);
 
      void deleteById (Integer id);
+
 }
 
