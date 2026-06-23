@@ -5,9 +5,11 @@ import fr.eni.springludotheque.bo.Jeu;
 import java.util.List;
 
 public interface JeuService {
-    void creationJeu (Jeu jeu);
+    Jeu creationJeu(Jeu jeu);
 
-    void editListeJeu (Jeu jeu);
 
-    List<Jeu> rechercherParGenre(String libelle);
+    List<Jeu> getAllJeu();
+
+
+
 }

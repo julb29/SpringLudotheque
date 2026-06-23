@@ -19,20 +19,20 @@ public class JeuServiceImpl implements JeuService {
     }
 
     @Override
-    public void creationJeu(Jeu jeu) {
-
+    public Jeu creationJeu(Jeu jeu) {
         jeuRepository.save(jeu);
+        return jeu;
     }
 
     @Override
-    public void editListeJeu(Jeu jeu) {
-
+    public List<Jeu> getAllJeu() {
+        return jeuRepository.findAll();
     }
 
-    @Override
+   /* @Override
     public List<Jeu> rechercherParGenre(String libelle) {
         // Remplace .findByGenresJeu(libelle) par le nouveau nom :
         return jeuRepository.findByGenres_Libelle(libelle);
-    }
+    }*/
 
 }
