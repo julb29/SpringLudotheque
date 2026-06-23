@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -27,6 +28,7 @@ public class ClientRestController {
     // Retourne la liste des clients et le statut http OK
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
+
     public List<Client> getAllClient() {
         List<Client> clients = clientService.getAllClient();
         return clients;
@@ -36,6 +38,13 @@ public class ClientRestController {
     @ResponseStatus(code = HttpStatus.OK)
     public List<Client> findByNomStartingWith(@RequestParam String nom) {
         List<Client> clients = clientService.findByNomStartingWith(nom);
+        return clients;
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Optional<Client> getClientById(@PathVariable Integer id) {
+        Optional<Client> clients = clientService.getClientById(id);
         return clients;
     }
 
@@ -89,21 +98,8 @@ public class ClientRestController {
             ApiResponse<Client> response = new ApiResponse<>(false, e.getMessage(), null);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
-
-
-
     }
 
-        /*
-        @PatchMapping("/{id}/status")
-        public ResponseEntity<ApiResponse<Todo>> updateTodoEtat(@PathVariable Integer id, @RequestBody Todo  todo) {
-            try {
-                Todo updatedTodo = todoService.updateEtat(id, todo.isEtat());
-                return ResponseEntity.ok(new ApiResponse<>(true, "Status updated", updatedTodo));
-            } catch (TodoNotFoundException e) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(false, e.getMessage(), null));
-            }
-        }*/
 
 
 }

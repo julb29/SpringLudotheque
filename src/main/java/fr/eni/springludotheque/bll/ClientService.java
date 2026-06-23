@@ -23,5 +23,4 @@ public interface ClientService {
 
     Client adresseModifiee(Integer id, @Valid Adresse adresse);
 
-
 }
