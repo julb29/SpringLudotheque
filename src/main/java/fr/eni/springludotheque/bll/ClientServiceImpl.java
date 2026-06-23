@@ -31,6 +31,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public List<Client> findByNomStartingWith(String nom) {
+        return clientRepository.findByNomStartingWith(nom );
+    }
+
+    @Override
     public Client creationClient(Client client) {
         clientRepository.save(client);
         return client;

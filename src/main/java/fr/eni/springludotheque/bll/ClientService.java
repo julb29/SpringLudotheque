@@ -13,6 +13,8 @@ public interface ClientService {
 
     Optional<Client> getClientById(Integer id);
 
+    List<Client> findByNomStartingWith(String nom);
+
     Client creationClient(Client client);
 
     Client updateClient(Integer id, Client client);
@@ -20,4 +22,6 @@ public interface ClientService {
     void deleteClient(Integer id);
 
     Client adresseModifiee(Integer id, @Valid Adresse adresse);
+
+
 }

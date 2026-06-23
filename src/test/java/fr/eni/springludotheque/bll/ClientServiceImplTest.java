@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
 public class ClientServiceImplTest {
 
@@ -37,4 +40,60 @@ public class ClientServiceImplTest {
         Assertions.assertEquals(client, clientBD);
 
     }
+
+    @Test
+    public void testModificationClient() {
+
+        // Arrange : Créa d'un client c1 avec son adresse aInitiale
+        Adresse aInitiale = new Adresse("rue des mouettes", "Quimper", "29000");
+        Client c1 = new Client("DUPOND", "Pierre");
+        c1.setAdresse(aInitiale);
+        clientRepository.save(c1);
+
+        // Nouvelles informations à appliquer aFinale et modif nom et prenom
+
+        Adresse aFinale = new Adresse("rue des chouettes", "Rennes", "35000");
+        c1.setNom("MARTIN");
+        c1.setPrenom("Jacques");
+        c1.setAdresse(aFinale);
+
+        // Act : Appel au ClientService
+        clientService.updateClient(c1.getId(), c1);
+
+        // Assort :Vérification que les modifications ont bien été implémentées
+
+        Client clientBD = clientRepository.findById(c1.getId()).orElse(null);
+        assertThat(clientBD).isNotNull();
+        assertThat(clientBD.getNom()).isEqualTo(c1.getNom());
+        assertThat(clientBD.getPrenom()).isEqualTo(c1.getPrenom());
+        assertThat(clientBD.getAdresse()).isEqualTo(c1.getAdresse());
+
+
+
+    }
+
+    @Test
+    public void testModificationAdresse (){
+
+        // Arrange : Créa d'un client c1 avec son adresse aInitiale
+        Adresse aInitiale = new Adresse("rue des mouettes", "Quimper", "29000");
+        Client c1 = new Client("DUPOND", "Pierre");
+        c1.setAdresse(aInitiale);
+        clientRepository.save(c1);
+
+        // Nouvelles informations à appliquer aFinale et modif nom et prenom
+
+        c1.getAdresse().setRue("rue des Flûtes");
+
+        // Act : Appel au ClientService
+        clientService.updateClient(c1.getId(), c1);
+
+        // Assort :Vérification que les modifications ont bien été implémentées
+
+        Client clientBD = clientRepository.findById(c1.getId()).orElse(null);
+        assertThat(clientBD).isNotNull();
+        assertThat(clientBD.getAdresse()).isEqualTo(c1.getAdresse());
+    }
+
+
 }

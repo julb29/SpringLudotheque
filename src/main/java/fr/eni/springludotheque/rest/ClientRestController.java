@@ -32,6 +32,13 @@ public class ClientRestController {
         return clients;
     }
 
+    @GetMapping("/search")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Client> findByNomStartingWith(@RequestParam String nom) {
+        List<Client> clients = clientService.findByNomStartingWith(nom);
+        return clients;
+    }
+
 
 
     // POST
