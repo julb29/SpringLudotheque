@@ -1,5 +1,6 @@
 package fr.eni.springludotheque.bll;
 
+import fr.eni.springludotheque.bo.Adresse;
 import fr.eni.springludotheque.bo.Client;
 import fr.eni.springludotheque.dal.ClientRepository;
 import fr.eni.springludotheque.exceptions.ClientNotFoundException;
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -22,6 +23,11 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Client> getAllClient() {
         return clientRepository.findAll();
+    }
+
+    @Override
+    public Optional<Client> getClientById(Integer id) {
+        return clientRepository.findById(id);
     }
 
     @Override
@@ -47,12 +53,31 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.save(clientExistant);
     }
 
+    @Override
+    public Client adresseModifiee(Integer id, Adresse adresse) {
+        Optional<Client> clientTrouve = getClientById(id);
+        if(clientTrouve.isEmpty()){
+            throw new ClientNotFoundException(id);
+        }
+        // 1. On garde l'ID de l'ancienne adresse en faisant .get()
+        if (clientTrouve.get().getAdresse() != null) {
+            adresse.setId(clientTrouve.get().getAdresse().getId());
+        }
+
+        // 2. On attribue la nouvelle adresse
+        clientTrouve.get().setAdresse(adresse);
+
+        // 3. On sauvegarde en BDD avec le repository
+        return clientRepository.save(clientTrouve.get());
+    }
 
 
     @Override
     public void deleteClient(Integer id) {
+
         clientRepository.deleteById(id);
     }
+
 
 }
 

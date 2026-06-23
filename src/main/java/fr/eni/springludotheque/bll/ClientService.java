@@ -1,12 +1,17 @@
 package fr.eni.springludotheque.bll;
 
+import fr.eni.springludotheque.bo.Adresse;
 import fr.eni.springludotheque.bo.Client;
+import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientService {
 
     List<Client> getAllClient();
+
+    Optional<Client> getClientById(Integer id);
 
     Client creationClient(Client client);
 
@@ -14,5 +19,5 @@ public interface ClientService {
 
     void deleteClient(Integer id);
 
-
+    Client adresseModifiee(Integer id, @Valid Adresse adresse);
 }
